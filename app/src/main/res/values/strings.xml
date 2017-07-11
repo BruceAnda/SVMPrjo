@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">SVMPrjo</string>
+
+    <string-array name="Lable">
+        <item>请选择</item>
+        <item>still</item>
+        <item>walk</item>
+        <item>run</item>
+    </string-array>
 </resources>
