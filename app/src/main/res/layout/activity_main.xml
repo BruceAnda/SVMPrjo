@@ -3,32 +3,77 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:keepScreenOn="true"
     android:orientation="vertical"
     tools:context="cn.zhaoliang5156.svmprjo.MainActivity">
 
     <TextView
+        android:id="@+id/tv_train_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="说明：步态分析，请在下面输入框中输入要采集样本数据的数量。" />
+        android:gravity="center_horizontal"
+        android:text="采集样本数量"
+        android:textSize="20sp" />
 
-    <EditText
-        android:id="@+id/et_train_num"
+    <RadioGroup
+        android:id="@+id/rg_train_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="输入样本数量"
-        android:inputType="number" />
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
 
-    <Spinner
-        android:id="@+id/sp_lable"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:entries="@array/Lable" />
+        <RadioButton
+            android:id="@+id/rb_train_num_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="30" />
+
+        <RadioButton
+            android:id="@+id/rb_train_num_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50" />
+
+        <RadioButton
+            android:id="@+id/rb_train_num_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/tv_lable"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lable:" />
+        android:gravity="center_horizontal"
+        android:text="标记动作"
+        android:textSize="20sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_lable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_lable_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="静止(0)" />
+
+        <RadioButton
+            android:id="@+id/rb_lable_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="走路(1)" />
+
+        <RadioButton
+            android:id="@+id/rb_lable_three"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="跑步(2)" />
+    </RadioGroup>
 
     <TextView
         android:id="@+id/tv_acc"
@@ -57,7 +102,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
+        android:gravity="center"
         android:orientation="horizontal">
 
         <ImageButton
@@ -70,14 +115,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始采集" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            android:text="采集" />
 
         <ImageButton
             android:id="@+id/btn_train"
@@ -89,14 +127,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="训练model" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            android:text="训练" />
 
         <ImageButton
             android:id="@+id/btn_understand"
@@ -108,7 +139,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="开始识别" />
+            android:text="识别" />
     </LinearLayout>
 
     <Button
