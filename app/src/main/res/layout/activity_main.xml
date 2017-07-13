@@ -79,25 +79,22 @@
         android:id="@+id/tv_acc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="acc:" />
+        android:gravity="center"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/tv_collection_num"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
         android:text="已经采集：" />
 
     <TextView
         android:id="@+id/tv_accuracy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Accuracy:" />
-
-    <TextView
-        android:id="@+id/tv_result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="识别结果：" />
+        android:gravity="center_horizontal"
+        android:text="准确率" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -105,47 +102,97 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/btn_collection"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/alert_dark_frame"
-            android:src="@android:drawable/ic_media_play" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="采集" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
 
-        <ImageButton
-            android:id="@+id/btn_train"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/alert_dark_frame"
-            android:src="@android:drawable/ic_media_play" />
+            <ImageButton
+                android:id="@+id/btn_collection"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@mipmap/sample_off" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="训练" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="采集" />
+        </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/btn_understand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@android:drawable/alert_dark_frame"
-            android:src="@android:drawable/ic_media_play" />
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="识别" />
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <ImageButton
+                android:id="@+id/btn_train"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@mipmap/train_off" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="训练" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <ImageButton
+                android:id="@+id/btn_understand"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@mipmap/test_off" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="识别" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_still"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/gait_still_off" />
+
+        <ImageView
+            android:id="@+id/iv_walk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/gait_walk_off" />
+
+        <ImageView
+            android:id="@+id/iv_run"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/gait_run_off" />
     </LinearLayout>
 
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="删除文件" />
+        android:layout_gravity="center_horizontal"
+        android:text="清空目录"
+        android:textSize="20sp" />
 
 </LinearLayout>

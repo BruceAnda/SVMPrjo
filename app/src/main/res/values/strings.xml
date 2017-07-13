@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SVMPrjo</string>
+    <string name="app_name">步态分析</string>
 
     <string-array name="Lable">
         <item>请选择</item>

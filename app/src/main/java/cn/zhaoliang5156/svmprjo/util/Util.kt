@@ -169,7 +169,7 @@ object Util {
             p.index = tempNode!![0].toInt()
             p.value = Features.zeroOneLibSvm(mScaleLower, mScaleUpper, tempNode[1].toDouble(), mFeatures[i][0], mFeatures[i][1])
             px[i] = p
-            Log.i(javaClass.simpleName, "${i}mScaleLower:${mScaleLower}=====mScaleUpper:${mScaleUpper}=====tempNode0:${tempNode[0].toInt()}=====tempNode1:${tempNode[1].toDouble()}=====mFeatures0:${mFeatures[i][0]}=====mFeatures1:${mFeatures[i][1]}")
+            //  Log.i(javaClass.simpleName, "${i}mScaleLower:${mScaleLower}=====mScaleUpper:${mScaleUpper}=====tempNode0:${tempNode[0].toInt()}=====tempNode1:${tempNode[1].toDouble()}=====mFeatures0:${mFeatures[i][0]}=====mFeatures1:${mFeatures[i][1]}")
         }
         val code = svm.svm_predict(svm_load_model, px)
         return code

@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
     var currentCollectionTrainNum = 0   // 当前采集样本数据
     var isStartCollection = false    // 是否开始采集的标记
     var isStartUnderStand: Boolean = false
-    var lables = arrayOf("静止", "走路", "跑步")
 
     // 采集的加速度监听器类
     val sensorListener: SensorEventListener = object : SensorEventListener {
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity() {
             var y = event.values[1]
             var z = event.values[2]
             val sqrt = Math.sqrt((x * x + y * y + z * z).toDouble())
-            tv_acc.text = "acc:${sqrt}"
+            tv_acc.text = "${sqrt}"
             // 当不够128个数据的时候继续收集数据，够128个数据的时候写入文件
             if (currentIndex >= 128) {
                 val features = Util.dataToFeatures(accArr, mHz)
@@ -52,19 +51,17 @@ class MainActivity : AppCompatActivity() {
                     Util.writeToFile("${filesDir}/train", lable, features)
                     currentCollectionTrainNum++
                     tv_collection_num.text = currentCollectionTrainNum.toString()
-                    currentIndex = 0
 
                     if (currentCollectionTrainNum >= trainNum) {        // 已经采集够了
-                        collection(false)
+                        collection(isStartCollection)
                         currentCollectionTrainNum = 0
-                        currentIndex = 0
-                        tv_collection_num.text = currentCollectionTrainNum.toString()
+                        tv_collection_num.text = "已经采集:${currentCollectionTrainNum}"
                     }
                 } else {     // 否则则是识别
                     val code = Util.predictUnScaleData(features)
-                    tv_result.text = "识别结果:${lables[code.toInt()]}"
-                    currentIndex = 0
+                    result(code.toInt())
                 }
+                currentIndex = 0
 
             } else {
                 accArr[currentIndex++] = sqrt
@@ -109,6 +106,7 @@ class MainActivity : AppCompatActivity() {
 
         // 开始训练按钮点击调用
         btn_train.setOnClickListener {
+            btn_train.setBackgroundResource(R.mipmap.train)
             doAsync {
                 createScaleFile(arrayOf("-l", "0", "-u", "1", "-s", "${filesDir}/range", "${filesDir}/train"))
                 createModelFile(arrayOf("-s", "0", "-c", "128.0", "-t", "2", "-g", "8.0", "-e", "0.1", "${filesDir}/scale", "${filesDir}/model"))
@@ -116,7 +114,8 @@ class MainActivity : AppCompatActivity() {
                 runOnUiThread {
                     var reader: BufferedReader = BufferedReader(InputStreamReader(FileInputStream("${filesDir}/accuracy")))
                     val line = reader.readLine()
-                    tv_accuracy.text = line
+                    tv_accuracy.text = line.replace("Accuracy", "准确率")
+                    btn_train.setBackgroundResource(R.mipmap.train_off)
                 }
             }
         }
@@ -175,10 +174,10 @@ class MainActivity : AppCompatActivity() {
     private fun collection(b: Boolean) {
         if (!b) { // 开始采集
             mSensorManager.registerListener(sensorListener, mAccSensor, mHz)
-            btn_collection.setImageResource(android.R.drawable.ic_media_pause)
+            btn_collection.setBackgroundResource(R.mipmap.sample)
         } else { // 停止采集
             mSensorManager.unregisterListener(sensorListener)
-            btn_collection.setImageResource(android.R.drawable.ic_media_play)
+            btn_collection.setBackgroundResource(R.mipmap.sample_off)
         }
         isStartCollection = !isStartCollection
     }
@@ -190,11 +189,23 @@ class MainActivity : AppCompatActivity() {
         if (!b) { // 开始识别
             Util.loadFile("${filesDir}/range", "${filesDir}/model")
             mSensorManager.registerListener(sensorListener, mAccSensor, mHz)
-            btn_understand.setImageResource(android.R.drawable.ic_media_pause)
+            btn_understand.setBackgroundResource(R.mipmap.test)
         } else { // 停止识别
             mSensorManager.unregisterListener(sensorListener)
-            btn_understand.setImageResource(android.R.drawable.ic_media_play)
+            btn_understand.setBackgroundResource(R.mipmap.test_off)
+            result(-1)
         }
         isStartUnderStand = !isStartUnderStand
+    }
+
+    fun result(code: Int) {
+        iv_still.setBackgroundResource(R.mipmap.gait_still_off)
+        iv_walk.setBackgroundResource(R.mipmap.gait_walk_off)
+        iv_run.setBackgroundResource(R.mipmap.gait_run_off)
+        when (code) {
+            0 -> iv_still.setBackgroundResource(R.mipmap.gait_still)
+            1 -> iv_walk.setBackgroundResource(R.mipmap.gait_walk)
+            2 -> iv_run.setBackgroundResource(R.mipmap.gait_run)
+        }
     }
 }
